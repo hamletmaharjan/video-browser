@@ -1,7 +1,10 @@
 <template>
 <div class="container">
     <SearchBar v-on:searchTerm="onSearchTerm"></SearchBar>
-    <VideoList v-bind:videos="videos" v-on:videoSelect="onVideoSelect"></VideoList>
+    <div class="row">
+        <VideoDetail v-bind:video="selectedVideo"/>
+        <VideoList v-bind:videos="videos" v-on:videoSelect="onVideoSelect"></VideoList>
+    </div>
 </div>
 
 </template>
@@ -11,22 +14,25 @@
 import axios from 'axios';
 import SearchBar from './components/SearchBar';
 import VideoList from './components/VideoList';
+import VideoDetail from './components/VideoDetail'
 const API_KEY = 'AIzaSyAs3kBHy4iyvqcSeIAvWm7BoAyfe50scsU';
 
 export default {
     name: 'App',
     components: {
         SearchBar,
-        VideoList
+        VideoList,
+        VideoDetail
     },
     data: function(){
         return {
-            videos:[]
+            videos:[],
+            selectedVideo: null
         };
     },
     methods: {
         onVideoSelect(video) {
-            console.log(video);
+            this.selectedVideo = video;
         },
         onSearchTerm: function(searchTerm){
             console.log(searchTerm);
