@@ -1,6 +1,6 @@
 <template>
-<div>
-    <SearchBar v-on:termChange="onTermChange"></SearchBar>
+<div class="container">
+    <SearchBar v-on:searchTerm="onSearchTerm"></SearchBar>
     <VideoList v-bind:videos="videos"></VideoList>
 </div>
 
@@ -11,7 +11,7 @@
 import axios from 'axios';
 import SearchBar from './components/SearchBar';
 import VideoList from './components/VideoList';
-const API_KEY = 'AIzaSyDeZ438ELFQmChoVujUDb7usm0FU28sp14';
+const API_KEY = 'AIzaSyAs3kBHy4iyvqcSeIAvWm7BoAyfe50scsU';
 
 export default {
     name: 'App',
@@ -25,7 +25,8 @@ export default {
         };
     },
     methods: {
-        onTermChange: function(searchTerm){
+        onSearchTerm: function(searchTerm){
+            console.log(searchTerm);
             axios.get('https://www.googleapis.com/youtube/v3/search',{
                 params:{
                     key: API_KEY,
